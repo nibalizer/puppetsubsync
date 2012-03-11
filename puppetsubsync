@@ -189,7 +189,7 @@ class PuppetSync
   end
 
   def deploy_directory(submodule, branch)
-    return "#{@options.deploy}/#{submodule}_#{branch}"
+    return "#{@options.deploy}/#{submodule.gsub("-","_")}_#{branch}"
   end
 
   def parsed_options?
