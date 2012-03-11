@@ -1,8 +1,12 @@
 #!/usr/bin/env ruby
 #
-# Copyright 2011, Reid Vandewiele <marut@cat.pdx.edu>
+# Copyright 2012, Spencer Krum <nibz@cat.pdx.edu>
 #
 # Credits:
+#
+#   Reid Vandewiele:
+#   <marut@cat.pdx.edu>
+#   https://github.com/marut
 #
 #   Stefan Schlesinger:
 #   https://github.com/sts/puppet-sync
