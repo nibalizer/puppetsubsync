@@ -1,12 +1,8 @@
 #!/usr/bin/env ruby
 #
-# Copyright 2012, Spencer Krum <nibz@cat.pdx.edu>
+# Copyright 2011, Reid Vandewiele <marut@cat.pdx.edu>
 #
 # Credits:
-#
-#   Reid Vandewiele:
-#   <marut@cat.pdx.edu>
-#   https://github.com/marut
 #
 #   Stefan Schlesinger:
 #   https://github.com/sts/puppet-sync
@@ -137,19 +133,23 @@ class PuppetSync
   def git_submodule(subcommand, submodule, deploy, branch)
     case subcommand.to_sym
     when :checkout
+	
       submodules = []
       current_module = []
+      puts "Using gitmodules file: #{deploy}/.gitmodules" if @options.verbose
       File.open("#{deploy}/.gitmodules").each do |line|
+        current_module += [line]
         if current_module.length == 3
           submodules += [current_module]
           current_module = []
         end
-        current_module += [line]
       end
       key_submodule = []
       submodules.each do |sub|
         key_submodule = sub if not sub.grep(/#{submodule}/).empty?
+	puts "Parsing submodule: #{sub}" if @options.verbose
       end
+      puts "Submodule root: #{key_submodule[1]}" if @options.verbose
       submodule_path = key_submodule[1].split(" ").last
       puts "cd into: submodule path: #{submodule_path}" if @options.verbose
       Dir.chdir("#{deploy}/#{submodule_path}") do
