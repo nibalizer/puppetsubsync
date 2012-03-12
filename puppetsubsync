@@ -74,8 +74,8 @@ class PuppetSync
     puts "| Submodule   : #{@options.submodule}"
     puts "| Branch      : #{@options.branch}"
     puts "| Deploy To   : #{deploy_directory(@options.submodule, @options.branch)}"
-    puts "| environment : #{deploy_directory(@options.submodule, @options.branch)}"
-    puts "| to test     : puppet agent --noop --test --environment=#{deploy_directory(@options.submodule, @options.branch)}"
+    puts "| environment : #{env_directory(@options.submodule, @options.branch)}"
+    puts "| to test     : puppet agent --noop --test --environment=#{env_directory(@options.submodule, @options.branch)}"
     puts "| repository  : #{@options.repository}"
     puts "| delete branch" if @options.delete
 
@@ -194,6 +194,10 @@ class PuppetSync
 
   def deploy_directory(submodule, branch)
     return "#{@options.deploy}/#{submodule.gsub("-","_")}_#{branch}"
+  end
+
+  def env_directory(submodule, branch)
+    return "#{submodule.gsub("-","_")}_#{branch}"
   end
 
   def parsed_options?
